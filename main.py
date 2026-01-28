@@ -15,11 +15,16 @@ def read_root():
 
 @app.post("/login")
 def iniciar_sesion(Login: Usuario):
-    for Usuario in usuarios:
-        if Usuario.nombre == Login.nombre and Usuario.contraseña == Login.contraseña:
+    for usua in usuarios:
+        if usua.nombre == Login.nombre and usua.contraseña == Login.contraseña:
             return {"message": "Inicio de sesión exitoso"}
     return {"message": "Credenciales inválidas"}
 
 @app.get("/usuarios")
 def obtener_usuarios():
     return usuarios
+
+@app.post("/usuarios")
+def agregar_usuario(nuevo_usuario: Usuario):
+    usuarios.append(nuevo_usuario)
+    return {"message": "Usuario agregado exitosamente"}
